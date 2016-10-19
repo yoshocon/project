@@ -1,11 +1,11 @@
 <?php
-	include('set.php');
+	// include('set.php');
 	$condition = @$_GET['condition'];	//狀態 登入 or 登出
 	$identity = @$_POST['identity'];	//判斷身分  user為使用者,admin為管理者
 	$account = @$_POST['account'];		//帳號
 	$psd = @$_POST['psd'];			//密碼
 	$check = @$_POST['check'];		//驗證碼
-	
+
 	//////////////////////////////
 	/*
 		echo "狀態:" . $condition;
@@ -20,12 +20,12 @@
 		echo "<br>";
 	*/
 	///////////////////////////////
-	
+
 	/////////////////////
-	
-	
-	
-	
+
+
+
+
 	if($condition == 'login')
 	{
 		if(@$_POST['check'] != $_SESSION['check'])		//驗證碼判斷
@@ -35,13 +35,13 @@
 		}else
 		{
 			if($identity == 'user' && $condition == 'login')		//使用者帳號密碼判斷
-			{	
+			{
 				//user資料庫查詢
 				$query = mysql_query("select * from `account` where `psd`='$psd'");
 				$row = mysql_fetch_array($query);
-				
+
 				if($account == 'user1' && $psd == '12345')
-				{	
+				{
 					$_SESSION['account'] = $account;
 					header('Location:index.php?identity=' . $identity);
 				}else if($account == $row[3] && $psd == $row[4])
@@ -71,7 +71,7 @@
 			}
 		}
 	}
-	
+
 	else		//登入失敗或非法登入
 	{
 		$_SESSION['account'] = '';
@@ -80,8 +80,8 @@
 		echo "<script>alert('登出成功...跳轉中請稍等')</script>";
 		//header("Location:login.php");
 	}
-	
-?>				
+
+?>
 <!DOCTYPE>
 <html>
 	<head></head>
